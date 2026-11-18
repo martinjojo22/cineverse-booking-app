@@ -1,14 +1,13 @@
-# OpenShift & Kubernetes-optimized Unprivileged NGINX
-# Runs as non-root user (UID 101) and binds to unprivileged port 8080
-FROM nginxinc/nginx-unprivileged:alpine
+# Official Red Hat Enterprise Universal Base Image for OpenShift & Kubernetes
+FROM registry.access.redhat.com/ubi9/nginx-122
 
-# Copy static frontend assets into standard web root
-COPY --chown=101:0 index.html /usr/share/nginx/html/
-COPY --chown=101:0 style.css /usr/share/nginx/html/
-COPY --chown=101:0 app.js /usr/share/nginx/html/
+# Ensure proper group ownership for OpenShift arbitrary non-root UIDs
+USER 0
+COPY index.html style.css app.js /opt/app-root/src/
+RUN chown -R 1001:0 /opt/app-root/src && chmod -R g+rwX /opt/app-root/src
+USER 1001
 
-# Expose standard unprivileged OpenShift web port
+# Standard unprivileged OpenShift port
 EXPOSE 8080
 
-# Start Nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]
