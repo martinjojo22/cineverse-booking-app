@@ -1,0 +1,146 @@
+/* CineVerse Custom Cinematic Stylesheet */
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal {
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07090e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* 3D Cinema Screen Curve */
+.cinema-screen-container {
+  perspective: 450px;
+}
+
+.cinema-screen {
+  transform: rotateX(-14deg);
+}
+
+/* Cinema Seat Styling */
+.seat {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px 7px 3px 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-family: 'Space Grotesk', monospace;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .seat {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+}
+
+/* Seat States */
+.seat-available {
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.seat-available:hover {
+  background-color: #334155;
+  color: #f8fafc;
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.seat-vip {
+  border-color: rgba(251, 191, 36, 0.5);
+  background-color: rgba(251, 191, 36, 0.12);
+  color: #fcd34d;
+}
+.seat-vip:hover {
+  background-color: rgba(251, 191, 36, 0.3);
+  transform: translateY(-2px) scale(1.08);
+}
+
+.seat-selected {
+  background-color: #06b6d4 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border-color: #22d3ee !important;
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.6);
+}
+
+.seat-reserved {
+  background-color: #260a0d !important;
+  border: 1px solid #450a0a !important;
+  color: #ef4444 !important;
+  cursor: not-allowed !important;
+  opacity: 0.65;
+}
+
+/* Movie Card Poster Glow */
+.movie-card:hover .movie-poster {
+  transform: scale(1.04);
+}
+
+/* Selected Date / Time button states */
+.tab-selected {
+  background-color: #06b6d4 !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.4);
+}
+
+/* Print Stylesheet for Physical Paper / PDF Printouts */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #ticketModal, #ticketModal * {
+    visibility: visible;
+  }
+  #ticketModal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+  }
+}
